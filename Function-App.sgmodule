@@ -1,0 +1,10 @@
+#!name=Function-App
+#!desc=Nettflix评分/Google自动翻页/微信链接解除限制/Spotify歌词翻译/B站策略自动切换/京东比价
+#!system=ios
+# 仓库地址 https://github.com/app2smile/rules
+
+
+[Script]
+
+[MITM]
+hostname = 
