@@ -1,0 +1,47 @@
+networks:
+  rustdesk-net:
+    external: false
+    
+services:
+  hbbs:
+    container_name: Rustdesk-hbbs
+    image: rustdesk/rustdesk-server:1.1.14
+    command: hbbs -k ZSDWV27we8GPWkh1232323Ty8b8p2ynGnFXsaScFS
+    volumes:
+      - ./data/rustdesk:/root
+    network_mode: host
+    restart: always
+
+  hbbr:
+    container_name: Rustdesk-hbbr
+    image: rustdesk/rustdesk-server:1.1.14
+    command: hbbr -k ZSDWV27we8GPWkh1232323Ty8b8p2ynGnFXsaScFS
+    environment:     
+      - SINGLE_BANDWIDTH=100
+      - TOTAL_BANDWIDTH=512
+      - LIMIT_SPEED=40
+    volumes:
+      - ./data/rustdesk:/root
+    network_mode: host
+    restart: always
+
+  rustdesk-api:
+    container_name: Rustdesk-api_21114
+    image: lejianwen/rustdesk-api:v2.6.25
+    
+    environment:
+      - TZ=Asia/Shanghai
+      - RUSTDESK_API_RUSTDESK_ID_SERVER=146.56.132.101:21116
+      - RUSTDESK_API_RUSTDESK_RELAY_SERVER=146.56.132.101:21117
+      - RUSTDESK_API_RUSTDESK_API_SERVER=http://146.56.132.101:21114
+      - RUSTDESK_API_RUSTDESK_KEY=ZSDWV27we8GPWkh1232323Ty8b8p2ynGnFXsaScFS
+      # RUSTDESK_API_RUSTDESK_KEY_FILE=
+      #- SINGLE_BANDWIDTH=480
+      #- TOTAL_BANDWIDTH=5120
+      #- LIMIT_SPEED=400
+
+    
+    volumes:
+      - ./data/rustdesk/api:/app/data #将数据库挂载出来方便备份
+    network_mode: host
+    restart: always
