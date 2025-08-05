@@ -1,0 +1,584 @@
+# Surge Smart Group Configuration
+# A comprehensive Surge configuration with intelligent proxy grouping
+# Last Updated: 2025.08.04
+#
+# Features:
+# - Smart regional proxy groups with automatic failover
+# - Comprehensive ad blocking and privacy protection
+# - Optimized rules for global and China domestic services
+# - Support for all major streaming platforms and services
+# - Gaming optimization with dedicated proxy groups
+# - AI services routing for ChatGPT, Claude, Gemini, etc.
+#
+# Setup Instructions:
+# 1. Replace "policy-path=改成你的订阅" with your subscription link in [Proxy Group] section
+# 2. Configure your custom proxy nodes in [Proxy] section if needed
+# 3. Adjust policy group selections based on your preferences
+# 4. Import this configuration file into Surge
+
+[General]
+# === GENERAL SETTINGS ===
+# Enhanced Wi-Fi Assist
+wifi-assist = true
+# Hybrid Network - Set to false to avoid connection issues
+all-hybrid = false
+# Gaming Optimization - Disable UDP priority for stability
+udp-priority = false
+# IPv6 Support - Disabled for compatibility
+ipv6 = false
+
+# === CONNECTIVITY TEST ===
+# Internet connectivity test URL
+internet-test-url = http://wifi.vivo.com.cn/generate_204
+# Proxy connectivity test URL
+proxy-test-url = http://cp.cloudflare.com/generate_204
+# Test timeout in seconds
+test-timeout = 5
+
+# === GEOIP DATABASE ===
+# MaxMind GeoIP database for accurate geolocation
+geoip-maxmind-url = https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country.mmdb
+
+# === WI-FI ACCESS ===
+# Allow Wi-Fi access
+allow-wifi-access = false
+# HTTP port for Surge iOS (default: 6152)
+wifi-access-http-port = 6152
+# SOCKS5 port for Surge iOS (default: 6153)
+wifi-access-socks5-port = 6153
+# HTTP listen address for Surge Mac
+http-listen = 0.0.0.0
+# SOCKS5 listen address for Surge Mac
+socks5-listen = 0.0.0.0
+# Allow hotspot access
+allow-hotspot-access = true
+
+# === REMOTE CONTROLLER ===
+# External controller access
+external-controller-access = steve@0.0.0.0:6160
+# HTTP API configuration
+http-api = steve@0.0.0.0:6166
+http-api-tls = true
+http-api-web-dashboard = true
+
+# === COMPATIBILITY ===
+# Compatibility mode (0 = disabled)
+compatibility-mode = 0
+
+# === BYPASS PROXY ===
+# Skip proxy for these addresses
+skip-proxy = localhost, *.local, captive.apple.com, guzzoni.apple.com, 0.0.0.0/8, 10.0.0.0/8, 17.0.0.0/8, 100.64.0.0/10, 127.0.0.0/8, 169.254.0.0/16, 172.16.0.0/12, 192.0.0.0/24, 192.0.2.0/24, 192.168.0.0/16, 192.88.99.0/24, 198.18.0.0/15, 198.51.100.0/24, 203.0.113.0/24, 224.0.0.0/4, 240.0.0.0/4, 255.255.255.255/32
+# Exclude simple hostnames
+exclude-simple-hostnames = true
+
+# === DNS SETTINGS ===
+# Read system hosts file
+read-etc-hosts = true
+# Use local host item for proxy
+use-local-host-item-for-proxy = true
+# Encrypted DNS follow outbound mode
+encrypted-dns-follow-outbound-mode = false
+# Include all networks
+include-all-networks = false
+# Include local networks
+include-local-networks = false
+# DNS servers
+dns-server = 223.5.5.5, 223.6.6.6, system
+
+# === ADVANCED SETTINGS ===
+# Logging level
+loglevel = notify
+# Show error page for reject
+show-error-page-for-reject = true
+# Always use real IP for these domains
+always-real-ip = link-ip.nextdns.io, *.msftconnecttest.com, *.msftncsi.com, *.srv.nintendo.net, *.stun.playstation.net, xbox.*.microsoft.com, *.xboxlive.com, *.logon.battlenet.com.cn, *.logon.battle.net, stun.l.google.com
+# Hijack DNS requests
+hijack-dns = 8.8.8.8:53, 8.8.4.4:53
+# Force HTTP engine hosts
+force-http-engine-hosts = *.ott.cibntv.net, 123.59.31.1, 119.18.193.135, 122.14.246.33, 175.102.178.52, 116.253.24.*, 175.6.26.*, 220.169.153.*
+# Use default policy if Wi-Fi not primary
+use-default-policy-if-wifi-not-primary = false
+# UDP policy not supported behavior
+udp-policy-not-supported-behaviour = REJECT
+# IPv6 VIF mode
+ipv6-vif = auto
+
+[Proxy]
+# === PROXY EXAMPLES ===
+# Configure your custom proxy nodes here
+# Remove the # symbol to enable any proxy configuration
+
+# === HTTP/HTTPS PROXY ===
+# HTTP-Proxy = http, server-hostname, port, username, password
+# Example-HTTP = http, 1.2.3.4, 443, username, password
+
+# === HTTPS PROXY ===
+# HTTPS-Proxy = https, server-hostname, port, username, password
+# Example-HTTPS = https, 1.2.3.4, 443, username, password
+
+# === SOCKS5 PROXY ===
+# SOCKS5-Proxy = socks5, server-hostname, port, username, password
+# Example-SOCKS5 = socks5, 1.2.3.4, 443, username, password
+# SOCKS5-TLS-Proxy = socks5-tls, server-hostname, port, username, password
+# Example-SOCKS5-TLS = socks5-tls, 1.2.3.4, 443, username, password
+
+# === SHADOWSOCKS PROXY ===
+# Shadowsocks = ss, server-hostname, port, encrypt-method, password
+# Example-SS = ss, 1.2.3.4, 8388, aes-256-gcm, password
+# Shadowsocks with SIP003 plugin
+# Example-SS-Plugin = ss, 1.2.3.4, 8388, aes-256-gcm, password, plugin=obfs-local, plugin-opts=obfs=http;obfs-host=www.google.com
+
+# === SHADOWSOCKSR PROXY ===
+# ShadowsocksR = ssr, server-hostname, port, encrypt-method, password, protocol, protocol-param, obfs, obfs-param
+# Example-SSR = ssr, 1.2.3.4, 8388, aes-256-cfb, password, auth_aes128_md5, {}, tls1.2_ticket_auth, {}
+
+# === VMESS PROXY ===
+# VMess = vmess, server-hostname, port, username=uuid, ws=true, ws-path=/path, ws-headers=Host:hostname
+# Example-VMess = vmess, 1.2.3.4, 10086, username=1386f85e-657b-4d6e-9d56-78badb75e1fd, ws=true, ws-path=/path, ws-headers=Host:www.google.com
+# VMess over TLS
+# Example-VMess-TLS = vmess, 1.2.3.4, 443, username=1386f85e-657b-4d6e-9d56-78badb75e1fd, ws=true, tls=true, ws-path=/path, ws-headers=Host:www.google.com
+
+# === VLESS PROXY ===
+# VLESS = vless, server-hostname, port, username=uuid, ws=true, ws-path=/path, ws-headers=Host:hostname
+# Example-VLESS = vless, 1.2.3.4, 443, username=1386f85e-657b-4d6e-9d56-78badb75e1fd, ws=true, tls=true, ws-path=/path, ws-headers=Host:www.google.com
+
+# === TROJAN PROXY ===
+# Trojan = trojan, server-hostname, port, password=password, sni=hostname
+# Example-Trojan = trojan, 1.2.3.4, 443, password=password, sni=www.google.com
+
+# === HYSTERIA PROXY ===
+# Hysteria = hysteria, server-hostname, port, auth=password, alpn=h3, obfs=salamander, obfs-password=password
+# Example-Hysteria = hysteria, 1.2.3.4, 443, auth=password, alpn=h3, obfs=salamander, obfs-password=password
+
+# === HYSTERIA2 PROXY ===
+# Hysteria2 = hysteria2, server-hostname, port, password=password, obfs=salamander, obfs-password=password
+# Example-Hysteria2 = hysteria2, 1.2.3.4, 443, password=password, obfs=salamander, obfs-password=password
+
+# === TUIC PROXY ===
+# TUIC = tuic, server-hostname, port, uuid=uuid, password=password, alpn=h3
+# Example-TUIC = tuic, 1.2.3.4, 443, uuid=1386f85e-657b-4d6e-9d56-78badb75e1fd, password=password, alpn=h3
+
+# === WIREGUARD PROXY ===
+# WireGuard = wireguard, section-name=wireguard-profile-name
+# [WireGuard wireguard-profile-name]
+# private-key = your-private-key
+# self-ip = 10.0.0.1
+# dns = 1.1.1.1, 8.8.8.8
+# mtu = 1280
+# peer = (public-key = peer-public-key, allowed-ips = "0.0.0.0/0, ::/0", endpoint = 1.2.3.4:51820)
+
+# === SNELL PROXY ===
+# Snell = snell, server-hostname, port, psk=password, version=4
+# Example-Snell = snell, 1.2.3.4, 6160, psk=password, version=4, reuse=true
+
+# === SSH PROXY ===
+# SSH = ssh, server-hostname, port, username=username, password=password
+# Example-SSH = ssh, 1.2.3.4, 22, username=root, password=password
+# SSH with private key
+# Example-SSH-Key = ssh, 1.2.3.4, 22, username=root, private-key-path=/path/to/private/key
+
+# === EXTERNAL PROXY ===
+# External proxy program
+# External = external, exec="/path/to/proxy/program", args="arg1,arg2", local-port=1080
+# Example-External = external, exec="/usr/local/bin/v2ray", args="-config,/path/to/config.json", local-port=1080
+
+[Proxy Group]
+# === MAIN POLICY GROUPS ===
+# Main selection between China Direct and Global Proxy
+🚀 Select = select, 🇨🇳 China Direct, 🌍 Global Proxy, no-alert=0, hidden=0, include-all-proxies=0
+
+# Global proxy with automatic selection
+🌍 Global Proxy = select, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇯🇵 Japan, 🇸🇬 Singapore, 🇺🇸 United States, 🇰🇷 Korea, 🇬🇧 United Kingdom, no-alert=0, hidden=0, include-all-proxies=0
+
+# All server group from subscription
+📡 All Servers = select, policy-path=改成你的订阅, update-interval=0, no-alert=0, hidden=0, include-all-proxies=0, policy-regex-filter=^((?!Remain|Expired|官网|如需|套餐|去除|剩余|距离|Reset|重置|流量).)+$
+
+# === REGIONAL POLICY GROUPS ===
+🇭🇰 Hong Kong = smart, update-interval=0, policy-regex-filter=港|🇭🇰|香港|HK|Hong, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇹🇼 Taiwan = smart, update-interval=0, policy-regex-filter=台|🇨🇳|台湾|TW|Tai, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇯🇵 Japan = smart, update-interval=0, policy-regex-filter=日|🇯🇵|日本|JP|Japan, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇸🇬 Singapore = smart, update-interval=0, policy-regex-filter=坡|🇸🇬|新加坡|狮城|SG|Singapore, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇺🇸 United States = smart, update-interval=0, policy-regex-filter=美|🇺🇸|美国|US|States|American, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇬🇧 United Kingdom = smart, update-interval=0, policy-regex-filter=🇬🇧|英国|英|英格兰|UK|United Kingdom, interval=600, tolerance=50, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+🇰🇷 Korea = smart, update-interval=0, policy-regex-filter=韩|韩国|Korea|KR|🇰🇷, no-alert=0, hidden=0, include-all-proxies=0, include-other-group=📡 All Servers
+
+# === SERVICE-SPECIFIC POLICY GROUPS ===
+# China Direct connection
+🇨🇳 China Direct = select, DIRECT, no-alert=0, hidden=0, include-all-proxies=0
+
+# Ad blocking and privacy
+🛡️ AdBlock = select, REJECT, REJECT-TINYGIF, REJECT-DROP, no-alert=0, hidden=0, include-all-proxies=0
+
+# Global media streaming
+🎬 Global Media = select, 🌍 Global Proxy, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇸🇬 Singapore, 🇯🇵 Japan, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# China media streaming
+📺 China Media = select, 🇨🇳 China Direct, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, no-alert=0, hidden=0, include-all-proxies=0
+
+# Gaming services
+🎮 Gaming = select, 🌍 Global Proxy, 🇺🇸 United States, 🇭🇰 Hong Kong, 🇸🇬 Singapore, 🇯🇵 Japan, no-alert=0, hidden=0, include-all-proxies=0
+
+# Apple services
+🍎 Apple = select, 🇨🇳 China Direct, 🇭🇰 Hong Kong, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# Microsoft services
+🖥️ Microsoft = select, 🇨🇳 China Direct, 🇭🇰 Hong Kong, 🇸🇬 Singapore, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# Google services
+🔍 Google = select, 🌍 Global Proxy, 🇺🇸 United States, 🇭🇰 Hong Kong, 🇸🇬 Singapore, no-alert=0, hidden=0, include-all-proxies=0
+
+# AI services
+🤖 AI Services = select, 🇺🇸 United States, 🇯🇵 Japan, 🇸🇬 Singapore, 🇭🇰 Hong Kong, no-alert=0, hidden=0, include-all-proxies=0
+
+# Speed test
+⚡ Speedtest = select, 🇨🇳 China Direct, 🌍 Global Proxy, 📡 All Servers, no-alert=0, hidden=0, include-all-proxies=0
+
+# Telegram
+💬 Telegram = select, 🌍 Global Proxy, 🇸🇬 Singapore, 🇺🇸 United States, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇯🇵 Japan, no-alert=0, hidden=0, include-all-proxies=0
+
+# YouTube
+📹 YouTube = select, 🌍 Global Proxy, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇸🇬 Singapore, 🇯🇵 Japan, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# Netflix
+🎥 Netflix = select, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇸🇬 Singapore, 🇯🇵 Japan, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# TikTok
+🎵 TikTok = select, 🇹🇼 Taiwan, 🇸🇬 Singapore, 🇯🇵 Japan, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+# Twitter/X
+🐦 Twitter = select, 🌍 Global Proxy, 🇭🇰 Hong Kong, 🇹🇼 Taiwan, 🇸🇬 Singapore, 🇯🇵 Japan, 🇺🇸 United States, no-alert=0, hidden=0, include-all-proxies=0
+
+[Rule]
+# === AD BLOCKING RULES ===
+# Advertising Lite - Essential ad blocking
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AdvertisingLite/AdvertisingLite.list,🛡️ AdBlock
+# Advertising - Comprehensive ad blocking
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Advertising/Advertising.list,🛡️ AdBlock
+# Advertising Test - Beta ad blocking rules
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AdvertisingTest/AdvertisingTest.list,🛡️ AdBlock
+# Zhihu Ads - Block Zhihu advertisements
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ZhihuAds/ZhihuAds.list,🛡️ AdBlock
+# AdGuard DNS Filter
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AdGuardSDNSFilter/AdGuardSDNSFilter_All.list,🛡️ AdBlock
+# EasyPrivacy - Privacy protection
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/EasyPrivacy/EasyPrivacy_All.list,🛡️ AdBlock
+# Block HTTP DNS
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BlockHttpDNS/BlockHttpDNS.list,🛡️ AdBlock
+# Hijacking protection
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Hijacking/Hijacking.list,🛡️ AdBlock
+# Privacy protection
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Privacy/Privacy.list,🛡️ AdBlock
+
+# === AI SERVICES ===
+# Apple Intelligence
+DOMAIN-SUFFIX,apple-relay.apple.com,🤖 AI Services
+DOMAIN-SUFFIX,apple-relay.cloudflare.com,🤖 AI Services
+DOMAIN-KEYWORD,apple-relay,🤖 AI Services
+# OpenAI Services
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OpenAI/OpenAI.list,🤖 AI Services
+# Claude AI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Claude/Claude.list,🤖 AI Services
+# Google Gemini
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Gemini/Gemini.list,🤖 AI Services
+# Microsoft Bing AI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Bing/Bing.list,🤖 AI Services
+
+# === SOCIAL MEDIA & COMMUNICATION ===
+# Telegram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Telegram/Telegram.list,💬 Telegram
+# PotatoChat
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PotatoChat/PotatoChat.list,💬 Telegram
+# Twitter/X
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Twitter/Twitter.list,🐦 Twitter
+# Threads
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Threads/Threads.list,🐦 Twitter
+# Facebook
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Facebook/Facebook.list,🌍 Global Proxy
+# Instagram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Instagram/Instagram.list,🌍 Global Proxy
+# WhatsApp
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Whatsapp/Whatsapp.list,🌍 Global Proxy
+# Discord
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Discord/Discord.list,🌍 Global Proxy
+# KakaoTalk
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/KakaoTalk/KakaoTalk.list,🌍 Global Proxy
+# Line
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Line/Line.list,🌍 Global Proxy
+# LinkedIn
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/LinkedIn/LinkedIn.list,🌍 Global Proxy
+
+
+# === STREAMING MEDIA ===
+# YouTube
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTube/YouTube.list,📹 YouTube
+# YouTube Music
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/YouTubeMusic/YouTubeMusic.list,📹 YouTube
+# Netflix
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Netflix/Netflix.list,🎥 Netflix
+# TikTok
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TikTok/TikTok.list,🎵 TikTok
+# Disney+
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Disney/Disney.list,🎬 Global Media
+# Spotify
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Spotify/Spotify.list,🎬 Global Media
+# BBC
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BBC/BBC.list,🎬 Global Media
+# Global Media
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GlobalMedia/GlobalMedia.list,🎬 Global Media
+# Emby
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Emby/Emby.list,🎬 Global Media
+
+# === CHINA MEDIA ===
+# BiliBili
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/BiliBili/BiliBili.list,📺 China Media
+# CCTV
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/CCTV/CCTV.list,📺 China Media
+# China Media
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaMedia/ChinaMedia.list,📺 China Media
+# DouYin (TikTok China)
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/DouYin/DouYin.list,📺 China Media
+
+# === GAMING ===
+# Game rules
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Game/Game.list,🎮 Gaming
+# Steam
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Steam/Steam.list,🎮 Gaming
+# Steam China
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/SteamCN/SteamCN.list,🇨🇳 China Direct
+# PlayStation
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PlayStation/PlayStation.list,🎮 Gaming
+# Epic Games
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Epic/Epic.list,🎮 Gaming
+# Electronic Arts
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/EA/EA.list,🎮 Gaming
+# Nintendo
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Nintendo/Nintendo.list,🎮 Gaming
+# Riot Games
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Riot/Riot.list,🎮 Gaming
+# Xbox
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Xbox/Xbox.list,🎮 Gaming
+# HoYoverse (miHoYo)
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/HoYoverse/HoYoverse.list,🎮 Gaming
+
+# === APPLE SERVICES ===
+# App Store
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppStore/AppStore.list,🍎 Apple
+# iCloud
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/iCloud/iCloud.list,🍎 Apple
+# TestFlight
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TestFlight/TestFlight.list,🍎 Apple
+# Apple Fitness+
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/FitnessPlus/FitnessPlus.list,🍎 Apple
+# Apple Mail
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleMail/AppleMail.list,🍎 Apple
+# Apple Music
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleMusic/AppleMusic.list,🍎 Apple
+# Apple News
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleNews/AppleNews.list,🍎 Apple
+# Apple TV
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/AppleTV/AppleTV.list,🍎 Apple
+# Siri
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Siri/Siri.list,🍎 Apple
+# Apple General
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple.list,🍎 Apple
+
+# === MICROSOFT SERVICES ===
+# GitHub
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GitHub/GitHub.list,🖥️ Microsoft
+# OneDrive
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/OneDrive/OneDrive.list,🖥️ Microsoft
+# Microsoft General
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Microsoft/Microsoft.list,🖥️ Microsoft
+
+# === GOOGLE SERVICES ===
+# Google General
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Google/Google.list,🔍 Google
+# Google Drive
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GoogleDrive/GoogleDrive.list,🔍 Google
+# Google Search
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/GoogleSearch/GoogleSearch.list,🔍 Google
+
+# === OTHER SERVICES ===
+# Speedtest
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Speedtest/Speedtest.list,⚡ Speedtest
+# Cloudflare
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Cloudflare/Cloudflare.list,🌍 Global Proxy
+# Amazon
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Amazon/Amazon.list,🌍 Global Proxy
+# PayPal
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PayPal/PayPal.list,🌍 Global Proxy
+# Sony
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Sony/Sony.list,🌍 Global Proxy
+# LastPass
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/LastPass/LastPass.list,🌍 Global Proxy
+# TeamViewer
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/TeamViewer/TeamViewer.list,🌍 Global Proxy
+# Tesla
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Tesla/Tesla.list,🌍 Global Proxy
+# PikPak
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/PikPak/PikPak.list,🌍 Global Proxy
+# Developer Tools
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Developer/Developer.list,🌍 Global Proxy
+# Scholar
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Scholar/Scholar.list,🌍 Global Proxy
+# Download
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Download/Download.list,🌍 Global Proxy
+# Duolingo
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Duolingo/Duolingo.list,🌍 Global Proxy
+
+# === CHINA DOMESTIC ===
+# WeChat
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/WeChat/WeChat.list,🇨🇳 China Direct
+# Zhihu
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Zhihu/Zhihu.list,🇨🇳 China Direct
+# XiaoHongShu (Little Red Book)
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/XiaoHongShu/XiaoHongShu.list,🇨🇳 China Direct
+# China General
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/China/China.list,🇨🇳 China Direct
+# China Test
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaTest/ChinaTest.list,🇨🇳 China Direct
+# China IPs
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/ChinaIPs/ChinaIPs.list,🇨🇳 China Direct
+# Local Area Network
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Lan/Lan.list,🇨🇳 China Direct
+# DNS
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/DNS/DNS.list,🇨🇳 China Direct
+
+# === GLOBAL PROXY ===
+# Global rules
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Global/Global.list,🌍 Global Proxy
+
+# === SPECIAL RULES ===
+# TMDB API
+DOMAIN-SUFFIX,api.themoviedb.org,🌍 Global Proxy
+# Surge official website
+DOMAIN-SUFFIX,nssurge.com,🌍 Global Proxy
+# Vercel (sub-store)
+DOMAIN-SUFFIX,vercel.app,🌍 Global Proxy
+
+# Safari anti-redirect
+DOMAIN,app-site-association.cdn-apple.com,🛡️ AdBlock
+
+# Block UDP for YouTube
+AND,((PROTOCOL,UDP), (DOMAIN-SUFFIX,googlevideo.com)),🛡️ AdBlock
+
+# National Anti-fraud Center
+DOMAIN,prpr.96110.cn.com,🇨🇳 China Direct
+DOMAIN-KEYWORD,96110,🛡️ AdBlock
+DOMAIN-SUFFIX,gjfzpt.cn,🛡️ AdBlock
+
+# Mail services
+DOMAIN-SUFFIX,smtp,🇨🇳 China Direct
+URL-REGEX,(Subject|HELO|SMTP),🇨🇳 China Direct
+
+# Unbreak rules
+RULE-SET,https://raw.githubusercontent.com/zxfccmm4/Profiles/main/Surge/Ruleset/Unbreak.list,🇨🇳 China Direct
+
+# === FINAL RULES ===
+# GeoIP China
+GEOIP,CN,🇨🇳 China Direct
+# Final rule
+FINAL,🚀 Select,dns-failed
+
+[Host]
+# === DOMESTIC DNS ===
+*.taobao.com = server:223.5.5.5
+*.tmall.com = server:223.5.5.5
+*.alipay.com = server:223.5.5.5
+*.alicdn.com = server:223.5.5.5
+*.aliyun.com = server:223.5.5.5
+*.jd.com = server:119.28.28.28
+*.qq.com = server:119.28.28.28
+*.tencent.com = server:119.28.28.28
+*.weixin.com = server:119.28.28.28
+*.bilibili.com = server:119.29.29.29
+hdslb.com = server:119.29.29.29
+*.163.com = server:119.29.29.29
+*.126.com = server:119.29.29.29
+*.126.net = server:119.29.29.29
+*.127.net = server:119.29.29.29
+*.netease.com = server:119.29.29.29
+*.mi.com = server:119.29.29.29
+*.xiaomi.com = server:119.29.29.29
+
+# === APPLE DNS ===
+*testflight.apple.com = server:8.8.4.4
+
+# === GOOGLE DNS ===
+# Firebase Cloud Messaging
+mtalk.google.com = 108.177.125.188
+# Google Download servers
+dl.google.com = server:119.29.29.29
+dl.l.google.com = server:119.29.29.29
+update.googleapis.com = server:119.29.29.29
+
+# === ROUTER ADMIN PANELS ===
+# Ubiquiti Amplifi Router
+amplifi.lan = server:syslib
+# Synology Router
+router.synology.com = server:syslib
+# Razer Sila Router
+sila.razer.com = server:syslib
+# Asus Router
+router.asus.com = server:syslib
+# Netgear Router
+routerlogin.net = server:syslib
+# Netgear Orbi Router
+orbilogin.com = server:syslib
+# Linksys Router
+www.LinksysSmartWiFi.com = server:syslib
+LinksysSmartWiFi.com = server:syslib
+myrouter.local = server:syslib
+# Xiaomi Mi WiFi Router
+www.miwifi.com = server:syslib
+miwifi.com = server:syslib
+# Huawei Router
+mediarouter.home = server:syslib
+# TP-Link Router
+tplogin.cn = server:syslib
+tplinklogin.net = server:syslib
+# MERCURY Router
+melogin.cn = server:syslib
+# FAST Router
+falogin.cn = server:syslib
+
+[URL Rewrite]
+# === GOOGLE SERVICES ===
+# Redirect Google Search Service
+^https?:\/\/(www.)?(g|google)\.cn https://www.google.com 302
+# Redirect Google Maps Service
+^https?:\/\/(ditu|maps).google\.cn https://maps.google.com 302
+
+# === HTTPS REDIRECTS ===
+# Redirect HTTP to HTTPS for major sites
+^https?:\/\/(www.)?taobao\.com\/ https://taobao.com/ 302
+^https?:\/\/(www.)?jd\.com\/ https://www.jd.com/ 302
+^https?:\/\/(www.)?mi\.com\/ https://www.mi.com/ 302
+^https?:\/\/you\.163\.com\/ https://you.163.com/ 302
+^https?:\/\/(www.)?suning\.com\/ https://suning.com/ 302
+^https?:\/\/(www.)?yhd\.com\/ https://yhd.com/ 302
+
+# === STREAMING SERVICES ===
+# AbemaTV IP check bypass
+^https?:\/\/api\.abema\.io\/v\d\/ip\/check - reject
+
+[Header Rewrite]
+# === ZHIHU OPTIMIZATION ===
+# Zhihu mobile user agent
+http-request ^https?:\/\/.*\.zhihu\.com\/(question|topic) header-replace User-Agent "osee2unifiedRelease/4432 osee2unifiedReleaseVersion/7.8.0 Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+
+# === GITHUB OPTIMIZATION ===
+# Fix GitHub rate limiting (429 error)
+http-request ^https:\/\/github\.com\/ header-replace Accept-Language en-us
+http-request ^https:\/\/(raw|gist)\.githubusercontent\.com\/ header-replace Accept-Language en-us
+
+[MITM]
+# === MITM SETTINGS ===
+# Skip server certificate verification
+skip-server-cert-verify = true
+# TCP connection
+tcp-connection = true
+# HTTP/2 support
+h2 = true
+# MITM hostnames
+hostname = www.google.cn, api.abema.io, *.zhihu.com, -CUSTOMMitM, sub.store, github.com, raw.githubusercontent.com, gist.githubusercontent.com
